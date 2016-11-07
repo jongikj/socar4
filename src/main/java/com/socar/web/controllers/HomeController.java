@@ -28,7 +28,7 @@ public class HomeController {
 	@Autowired CustomerServiceImpl service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String intro(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		command.setKeyField("list");
 		command.setKeyword("1");

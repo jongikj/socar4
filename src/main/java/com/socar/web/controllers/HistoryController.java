@@ -137,22 +137,22 @@ public class HistoryController {
          map.put("groupSize", Values.GROUP_SIZE);
          return map;
 	}
-	@RequestMapping(value="/select_date", method=RequestMethod.POST, consumes="application/json")
-	public @ResponseBody Map<String, Object> goSelectDate(@RequestBody BookingDTO param) {
-		logger.info("BookingController GO TO {}", "select_date");
-		logger.info(param.getStartDate());
-		logger.info(param.getEndDate());
-		logger.info(param.getInput_location());
-		logger.info("CarController GO TO {}", "list");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("carList", cService.list());
-		return map;
-	}
+	   @RequestMapping(value="/select_date", method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<String, Object> goSelectDate(@RequestBody BookingDTO param) {
+	      logger.info("BookingController GO TO {}", "select_date");
+	      logger.info(param.getStartDate());
+	      logger.info(param.getEndDate());
+	      logger.info(param.getInput_location());
+	      logger.info("CarController GO TO {}", "list");
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("carList", cService.searchList(param));
+	      return map;
+	   }
 	
-	@RequestMapping("/useStatus/{keyword}")
-	public @ResponseBody Retval useStauts(@PathVariable String keyword){
-		command.setKeyword(keyword);
-		service.useStatus(command);
-		return retval;
-	}
+	   @RequestMapping("/useStatus/{keyword}")
+	   public @ResponseBody Retval useStauts(@PathVariable String keyword){
+	      command.setKeyword(keyword);
+	      service.useStatus(command);
+	      return retval;
+	   }
 }

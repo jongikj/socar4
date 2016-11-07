@@ -903,7 +903,7 @@ var admin = (function(){
 				inquiry_list += ADMIN_INQUIRY_TH;				
 				if (data.totCount===0) {
 					inquiry_list +='<tr><td colspan=7>등록된 문의가 없습니다.</td></tr>';
-				} else {					
+				} else {
 					$.each(data.list, function(i,inquiry){
 						inquiry_list +=
 							'<tr>'
@@ -923,7 +923,7 @@ var admin = (function(){
 				inquiry_list += '</tbody></table>'
 				if (data.totCount===0) {
 					pagination ='';
-				}else{
+				} else {
 					pagination = '<div id="admin_paginate" class="paginate">';
 					if(pgNum > groupSize){
 	                    var temp;
