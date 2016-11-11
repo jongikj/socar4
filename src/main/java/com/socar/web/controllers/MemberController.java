@@ -263,7 +263,7 @@ public class MemberController {
       return temp;
    }
    
-   @RequestMapping("/regist")
+   @RequestMapping(value="/regist", method=RequestMethod.POST)
    public @ResponseBody Retval regist(@RequestBody MemberDTO param){
       logger.info("MemberController GO TO {}", "regist");
       MemberDTO temp = new MemberDTO();
