@@ -87,7 +87,7 @@
 			content content,
 			file_name fileName,
 			reg_date regDate
-		from Customer where ${keyField} = #{keyword}
+		from customer where ${keyField} = #{keyword}
    </select>
    <select id="inquiry_form" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.CustomerDTO">
         insert into customer(id,title,content,category,file_name,reg_date,role)
@@ -107,7 +107,7 @@
 	      ) t2 
    </select>
       <update id="update" statementType="CALLABLE" parameterType="com.socar.web.domains.CustomerDTO">
-      { call MYSQL.UPDATE_CUSTOMER(
+      { call update_customer(
          #{answer, mode=IN,jdbcType=CLOB},
          #{customerSeq, mode=IN,jdbcType=BIGINT}
       )

@@ -652,7 +652,8 @@ var customer = (function(){
 				notice_list += CUSTOMER_NOTICE;
 				notice_list += CUSTOMER_NOTICE_TH;
 				if (data.totCount == 0){
-					notice += '<tr><td colspan=3>등록된 공지사항이 없습니다.</td></tr>';
+					notice_list += '<tr><td colspan=3>등록된 공지사항이 없습니다.</td></tr>';
+					frame += notice_list;
 				} else {
 					$.each(data.list, function(i, customer){
 						notice_list += 
@@ -662,58 +663,57 @@ var customer = (function(){
 							+'<td>' + customer.regDate + '</td>'
 							+'<tr>';
 					}); //else 의 $.each 끝
-				}
-				
-				notice_list += '</tbody></table>';
-				var pagination = 
-					 '<nav aria-label="Page navigation">'
-					+'<ul class="paginate">';
-				$('#pub_article').html(notice_list);
-				var temp_num;
-				if(pgNum > groupSize){
-					var temp;
-					if(pgNum % groupSize == 0){
-						temp = (Math.floor(((pgNum - groupSize) / groupSize)) * groupSize) + 1 - groupSize;
-					}else{
-						temp = (Math.floor(((pgNum - groupSize) / groupSize)) * groupSize) + 1;
-					}					
-					var temp2 = 1;
-					pagination +=
-						'<a onclick="customer.notice_list(' + temp2 + ')" aria-label="Previous">'
-						+'<span style="font-size: 30px" aria-hidden="true">&laquo;</span>'
-						+'</a>'
-						+'<a onclick="customer.notice_list(' + temp + ')" aria-label="Previous">'
-						+'<span aria-hidden="true"><</span>'
-						+'</a>';
-				}
-				for(var i=startPg; i < startPg+groupSize && i <= totPg; i++){
-					if(i == pgNum){
-						pagination += '<font color="blue"><strong>' + i + '</strong></font>';
-					} else {
-						pagination += '<a onclick="customer.notice_list('+ i +')">' + ' ' + i + ' ' + '</a>';
+					notice_list += '</tbody></table>';
+					var pagination = 
+						'<nav aria-label="Page navigation">'
+						+'<ul class="paginate">';
+					$('#pub_article').html(notice_list);
+					var temp_num;
+					if(pgNum > groupSize){
+						var temp;
+						if(pgNum % groupSize == 0){
+							temp = (Math.floor(((pgNum - groupSize) / groupSize)) * groupSize) + 1 - groupSize;
+						}else{
+							temp = (Math.floor(((pgNum - groupSize) / groupSize)) * groupSize) + 1;
+						}					
+						var temp2 = 1;
+						pagination +=
+							'<a onclick="customer.notice_list(' + temp2 + ')" aria-label="Previous">'
+							+'<span style="font-size: 30px" aria-hidden="true">&laquo;</span>'
+							+'</a>'
+							+'<a onclick="customer.notice_list(' + temp + ')" aria-label="Previous">'
+							+'<span aria-hidden="true"><</span>'
+							+'</a>';
 					}
-					temp_num = i;
-				}
-				if(temp_num != totPg){ //0~9
-					var temp3;
-					if(pgNum % groupSize == 0){
-						temp3 = (Math.floor(((pgNum + groupSize) / groupSize)) * groupSize) + 1 - groupSize;
-					}else{
-						temp3 = (Math.floor(((pgNum + groupSize) / groupSize)) * groupSize) + 1;
+					for(var i=startPg; i < startPg+groupSize && i <= totPg; i++){
+						if(i == pgNum){
+							pagination += '<font color="blue"><strong>' + i + '</strong></font>';
+						} else {
+							pagination += '<a onclick="customer.notice_list('+ i +')">' + ' ' + i + ' ' + '</a>';
+						}
+						temp_num = i;
 					}
-					var temp4 = totPg;
-					pagination += 
-						'<a onclick="customer.notice_list(' + temp3 + ')" aria-label="Next">'
-						+'<span aria-hidden="true">></span>'
-						+'</a>'
-						+'<a onclick="customer.notice_list(' + temp4 + ')" aria-label="Next">'
-						+'<span style="font-size: 30px" aria-hidden="true">&raquo;</span>'
-						+'</a>';
+					if(temp_num != totPg){ //0~9
+						var temp3;
+						if(pgNum % groupSize == 0){
+							temp3 = (Math.floor(((pgNum + groupSize) / groupSize)) * groupSize) + 1 - groupSize;
+						}else{
+							temp3 = (Math.floor(((pgNum + groupSize) / groupSize)) * groupSize) + 1;
+						}
+						var temp4 = totPg;
+						pagination += 
+							'<a onclick="customer.notice_list(' + temp3 + ')" aria-label="Next">'
+							+'<span aria-hidden="true">></span>'
+							+'</a>'
+							+'<a onclick="customer.notice_list(' + temp4 + ')" aria-label="Next">'
+							+'<span style="font-size: 30px" aria-hidden="true">&raquo;</span>'
+							+'</a>';
+					}
+					pagination += '</ul></nav>';
+					frame += notice_list;
+					frame += pagination;
 				}
-				pagination += '</ul></nav>';
-				frame += notice_list;
-				frame += pagination;
-				notice_list += CUSTOMER_NOTICE_END;
+				frame += CUSTOMER_NOTICE_END;
 				$('#pub_article').html(frame);
 				
 				$('#btn_notice_search').click(function() {

@@ -17,4 +17,5 @@ public interface CardService {
 	public Retval findCount(Command command);
 	public List<CardDTO> find(Command command);
 	public List<CardDTO> list();
+	public String update(CardDTO param);
 }

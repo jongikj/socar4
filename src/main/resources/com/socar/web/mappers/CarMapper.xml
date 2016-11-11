@@ -14,7 +14,7 @@
 	      car_option carOption,
 	      socar_zone socarZone,
 	      car_img carImg
-		from Car
+		from car
    </select>
    <select id="listZone" resultType="string">
    select distinct socar_zone socarZone from car
@@ -38,7 +38,7 @@
 	order by t2.seq2 asc
    </select>
    <select id="count" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Retval">
-   	select count(*) as count from Car
+   	select count(*) as count from car
    </select>
    <select id="find_count" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Command">
    	select count(*) as count 
@@ -71,7 +71,7 @@
       c.car_option carOption,
       c.socar_zone socarZone,
       c.car_img carImg
-      from Car c where ${keyField} like CONCAT('%',#{keyword},'%') order by car_seq desc
+      from car c where ${keyField} like CONCAT('%',#{keyword},'%') order by car_seq desc
       )A,
       (select @NO := 0)B
       )C
@@ -88,7 +88,7 @@
 	      car_option carOption,
 	      socar_zone socarZone,
 	      car_img carImg
-		from Car where ${keyField} = #{keyword}
+		from car where ${keyField} = #{keyword}
    </select>
    <select id="searchList" resultType="com.socar.web.domains.CarDTO" parameterType="com.socar.web.domains.BookingDTO" statementType="CALLABLE">
         {call sp_select_carlist(
@@ -109,7 +109,7 @@
 	  where ${keyField} = #{keyword}
    </select>
    <update id="update" statementType="CALLABLE" parameterType="com.socar.web.domains.CarDTO">
-      { call MYSQL.UPDATE_CAR(
+      { call update_car(
          #{carOption, mode=IN,jdbcType=VARCHAR},
          #{socarZone, mode=IN,jdbcType=VARCHAR},
          #{rentAmt, mode=IN,jdbcType=INTEGER},
@@ -123,7 +123,7 @@
       select count(*) from car_v where carNum = #{carNum}
    </select>
    <insert id="regist" statementType="CALLABLE" parameterType="com.socar.web.domains.CarDTO">
-      { call MYSQL.INSERT_CAR(
+      { call insert_car(
          #{carNum, mode=IN,jdbcType=VARCHAR},
          #{carType, mode=IN,jdbcType=VARCHAR},
          #{oilType, mode=IN,jdbcType=VARCHAR},

@@ -14,10 +14,10 @@
 		from card
    </select>
    <select id="count" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Retval">
-   	select count(*) as count from Card
+   	select count(*) as count from card
    </select>
    <select id="findCount" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Command">
-   	   	  select count(*) as count from Card where ${keyField} = #{keyword}
+   	   	  select count(*) as count from card where ${keyField} = #{keyword}
    </select>
 	<select id="find" resultType="com.socar.web.domains.CardDTO" parameterType="com.socar.web.domains.Command">
 		select 
@@ -29,7 +29,11 @@
 		id id
 		from card where ${keyField} = #{keyword}
    </select>
-<insert id="regist" parameterType="com.socar.web.domains.CardDTO">
-	call insert_card(#{cardNum},#{cardPw},#{cardMonth},#{cardYear},#{businessNum},#{id});
-</insert>
+	<insert id="regist" parameterType="com.socar.web.domains.CardDTO">
+		call insert_card(#{cardNum},#{cardPw},#{cardMonth},#{cardYear},#{businessNum},#{id});
+	</insert>
+	<update id="update" parameterType="com.socar.web.domains.CardDTO">
+		update card set card_num= #{cardNum} , card_month = #{cardMonth} , card_year = #{cardYear}, 
+		business_num = #{businessNum},card_pw = #{cardPw}  where id = #{id}
+	</update>
 </mapper>

@@ -62,6 +62,6 @@ order by t2.seq asc
 	   where ${keyField} = #{keyword}	   	  
    </select>
    <insert parameterType="com.socar.web.domains.AdminDTO" id="regist" statementType="CALLABLE"> 
-   { call MYSQL.INSERT_NOTICE( #{title, mode=IN,jdbcType=VARCHAR}, #{content, mode=IN,jdbcType=CLOB}, #{regDate, mode=IN,jdbcType=VARCHAR} ) } 
+   { call insert_notice( #{title, mode=IN,jdbcType=VARCHAR}, #{content, mode=IN,jdbcType=CLOB}, #{regDate, mode=IN,jdbcType=VARCHAR} ) } 
    </insert>
    </mapper>

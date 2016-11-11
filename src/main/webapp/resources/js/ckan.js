@@ -594,7 +594,7 @@ var ADMIN_COUPON_REGIST = '<div id= "admin_coupon" class="box">'
 	+'<th>할인조건</th>'
 	+'<td>'
 	+'<select name="admin_reg_dc_option" id="admin_reg_dc_option">'
-	+'<option value="금액" selected>금액</option>'
+	+'<option value="-" selected>금액</option>'
 	+'<option value="%">%</option>'
 	+'</select>'
 	+'</td>'
@@ -881,7 +881,7 @@ var admin = (function(){
 						}
 					},
 					error : function(x,s,m){
-						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 					}
 					
 				});				
@@ -1099,7 +1099,7 @@ var admin = (function(){
 						}
 					},
 					error : function(x,s,m){
-						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 					}
 					
 				});
@@ -1130,8 +1130,8 @@ var admin = (function(){
 							+'<td class="subj"><a href="#" onclick="admin.car_update_form('+car.seq+')" id= "a_admin_notice_content"><img src="'+app.img()+'/car_image/'+car.carImg+'" id="car_thumb"></a><p>'+car.carType+'</p></td>'
 							+'<td>'+car.oilType+'</td>'
 							+'<td>'+car.carOption+'</td>'
-							+'<td>'+admin.numberWithCommas(car.rentAmt)+'원</td>'
-							+'<td>'+admin.numberWithCommas(car.driveAmt)+'원/km</td>'
+							+'<td>'+car.rentAmt+'원</td>'
+							+'<td>'+car.driveAmt+'원/km</td>'
 							+'<td style="visibility:hidden">'+car.seq+'</td>'
 							+'</tr>';
 					});
@@ -1225,8 +1225,8 @@ var admin = (function(){
 							+'<td><a href="#" onclick="admin.car_update_form('+car.seq+')" id= "a_admin_notice_content"><img src="'+app.img()+'/car_image/'+car.carImg+'" id="car_thumb"></a><p>'+car.carType+'</p></td>'
 							+'<td>'+car.oilType+'</td>'
 							+'<td>'+car.carOption+'</td>'
-							+'<td>'+admin.numberWithCommas(car.rentAmt)+'원</td>'
-							+'<td>'+admin.numberWithCommas(car.driveAmt)+'원/km</td>'
+							+'<td>'+car.rentAmt+'원</td>'
+							+'<td>'+car.driveAmt+'원/km</td>'
 							+'<td style="visibility:hidden">'+car.seq+'</td>'
 							+'</tr>';
 					});
@@ -1298,8 +1298,8 @@ var admin = (function(){
 				$('#admin_car_type').text(data.carType);				
 				$('#admin_oil_type').text(data.oilType);
 				$('#u_admin_car_option').html('<input type="text" id="admin_car_option" class="input" value="'+data.carOption+'" style="width:400px"/>');
-				$('#u_admin_rent_amt').html('<input id="admin_rent_amt" type="text" name="option" class="input" value="'+admin.numberWithCommas(data.rentAmt)+'" style="width:100px"/>  원');
-				$('#u_admin_drive_amt').html('<input id="admin_drive_amt" type="text" name="option" class="input" value="'+admin.numberWithCommas(data.driveAmt)+'" style="width:100px"/> 원/km');
+				$('#u_admin_rent_amt').html('<input id="admin_rent_amt" type="text" name="option" class="input" value="'+data.rentAmt+'" style="width:100px"/>  원');
+				$('#u_admin_drive_amt').html('<input id="admin_drive_amt" type="text" name="option" class="input" value="'+data.driveAmt+'" style="width:100px"/> 원/km');
 			});
 			$('#btn_admin_car_update').click(function(e){
 				e.preventDefault();
@@ -1325,7 +1325,7 @@ var admin = (function(){
 						}
 					},
 					error : function(x,s,m){
-						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 					}
 					
 				});
@@ -1350,7 +1350,7 @@ var admin = (function(){
 					});
 				},
 				error : function(x,s,m){
-					alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+					alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 				}
 			});
 			
@@ -1424,7 +1424,7 @@ var admin = (function(){
 						}
 					},
 					error : function(x,s,m){
-						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 					}
 					
 				});
@@ -1627,14 +1627,14 @@ var admin = (function(){
 				//$('#u_admin_coupon_option_detail').html('<input type="text" id="admin_coupon_option_detail" class="input" value="'+data.optionDetail+'" style="width:400px"/>');
 				$('#u_admin_coupon_option_detail').text(data.optionDetail);
 				$('#admin_coupon_dc_option').text(data.dcOption);
-				$('#admin_coupon_dc').text(admin.numberWithCommas(data.dc));
-				$('#admin_coupon_count').text(admin.numberWithCommas(data.couponCount));
+				$('#admin_coupon_dc').text(data.dc);
+				$('#admin_coupon_count').text(data.couponCount);
 			});
 			$('#btn_admin_coupon_update').click(function(e){
 				e.preventDefault();
 				var join_info = {
 						'optionHeader' : $('#admin_coupon_option_header').val(),
-						'optionDetail' : $('#admin_coupon_option_detail').val(),
+						'optionDetail' : $('#u_admin_coupon_option_detail').val(),
 						'couponMasterSeq' : $('#admin_coupon_seq').html()
 					};
 			    $.ajax({
@@ -1651,7 +1651,7 @@ var admin = (function(){
 						}
 					},
 					error : function(x,s,m){
-						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 					}
 					
 				});
@@ -1736,7 +1736,7 @@ var admin = (function(){
 						}
 					},
 					error : function(x,s,m){
-						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+error);
+						alert("code:"+x.status+"\n"+"message:"+x.responseText+"\n"+"m:"+m);
 					}
 					
 				});

@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.socar.web.mappers.MyCouponMapper">
 	<select id="count" resultType="com.socar.web.domains.Retval">
-		select count(*) as count from Coupon_member
+		select count(*) as count from coupon_member
 	</select>
    	<select id="findCount" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Command">
-   	  select count(*) as count from Coupon_member where ${keyField} = #{keyword}
+   	  select count(*) as count from coupon_member where ${keyField} = #{keyword}
    	</select>
 	<select id="list" resultType="com.socar.web.domains.CouponMemberMasterDTO" parameterType="com.socar.web.domains.Command">
      select
@@ -36,7 +36,7 @@
 		 	cm.use_flag useFlag,
 		 	cm.coupon_master_seq couponMasterSeq,
 		 	cm.id id 
-	      from Coupon_member cm where ${keyField} = #{keyword} order by coupon_member_seq desc
+	      from coupon_member cm where ${keyField} = #{keyword} order by coupon_member_seq desc
 	      )A,
 	      (select @NO := 0)B
 	      )C
@@ -55,7 +55,7 @@
 	where u.coupon_master_seq = m.coupon_master_seq and use_flag = 'N' and id = #{keyword};
 	</select>
 	<select id="useFlag" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Command">
-		update Coupon_member set use_flag = 'Y' where coupon_member_seq = ${keyword} 
+		update coupon_member set use_flag = 'Y' where coupon_member_seq = ${keyword} 
 	</select>
 		<select id="existId" parameterType="com.socar.web.domains.MyCouponDTO" resultType="int">
 		select count(*) from coupon_member where id = #{id} and coupon_master_seq = #{couponMasterSeq}

@@ -15,4 +15,5 @@ public interface CardMapper {
 		public List<CardDTO> find(Command command);
 		public List<CardDTO> list();
 		public int regist(CardDTO param);
+		public int update(CardDTO param);
 }

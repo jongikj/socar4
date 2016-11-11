@@ -22,7 +22,7 @@ select count(*) as count from coupon_master
          dc_option dcOption,
          dc dc,
          coupon_count couponCount 
-      from Coupon_master
+      from coupon_master
 </select>
 <select id="find" parameterType="com.socar.web.domains.Command" resultType="com.socar.web.domains.CouponDTO">
      select *
@@ -42,7 +42,7 @@ select count(*) as count from coupon_master
       cm.dc_option dcOption,
       cm.dc dc,
       cm.coupon_count couponCount 
-      from Coupon_master cm where ${keyField} = #{keyword} order by coupon_master_seq desc
+      from coupon_master cm where ${keyField} = #{keyword} order by coupon_master_seq desc
       )A,
       (select @NO := 0)B
       )C
@@ -87,7 +87,7 @@ select count(*) as count from coupon_master
 	  where cm.coupon_master_seq = #{keyword}
    </select>
    <update id="update" statementType="CALLABLE" parameterType="com.socar.web.domains.CouponDTO">
-      { call MYSQL.UPDATE_COUPON_MASTER(
+      { call update_coupon_master(
          #{couponMasterSeq, mode=IN,jdbcType=INTEGER},
          #{optionHeader, mode=IN,jdbcType=CLOB},
          #{optionDetail, mode=IN,jdbcType=VARCHAR}
@@ -95,7 +95,7 @@ select count(*) as count from coupon_master
       }
    </update>
    <insert id="regist" statementType="CALLABLE" parameterType="com.socar.web.domains.CouponDTO">
-      { call MYSQL.INSERT_COUPON_MASTER(
+      { call insert_coupon_master(
          #{couponName, mode=IN,jdbcType=VARCHAR},
          #{openDateStart, mode=IN,jdbcType=VARCHAR},
          #{openDateEnd, mode=IN,jdbcType=VARCHAR},

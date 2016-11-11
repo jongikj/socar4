@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +87,35 @@ public class CardController {
 		}
 		map.put("cardNum", list.get(0).getCardNum());
 		return map;
+	}
+	
+	@RequestMapping(value="/cardUpdate",method=RequestMethod.POST,consumes="application/json")
+	public @ResponseBody Retval goCardUpdate(@RequestBody CardDTO param, HttpSession session){
+		logger.info("GO TO {}","=======update========");
+	/*	card.setBusinessNum(param.getBusinessNum());
+		card.setCardMonth(param.getCardMonth());
+		card.setCardNum(param.getCardNum());
+		card.setCardPw(param.getCardPw());
+		card.setCardYear(param.getCardYear());
+		*/
+		
+		logger.info("update  session.Get {}",session.getAttribute("card"));
+		/*CardDTO temp = (CardDTO) session.getAttribute("card");
+		temp.setCardNum(param.getCardNum());
+		temp.setCardMonth(param.getCardMonth());
+		temp.setCardYear(param.getCardYear());
+		if (param.getCardPw() == "") {
+			temp.setCardPw("");
+			temp.setBusinessNum(param.getBusinessNum());
+		} else {
+			temp.setBusinessNum("");
+			temp.setCardPw(param.getCardPw());
+		}*/
+		retval.setMessage(service.update(param));
+		//session.setAttribute("card", service.update(temp));
+		logger.info("update  setMessage {}",service.update(param));
+		logger.info("update 아이디 {}",param.getId());
+		logger.info("update 카드번호 {}",param.getCardNum());
+		return retval;
 	}
 }

@@ -57,5 +57,15 @@ public class CardServiceImpl implements CardService{
 		return mapper.list();
 	}
 
-
+	@Override
+	public String update(CardDTO param) {
+		System.out.println("CARDserviceImpl UPDATE 진입");
+		System.out.println("카드ID"+param.getId());
+		System.out.println("카드번호	"+param.getCardNum());
+		System.out.println("카드비번"+param.getCardPw());
+		System.out.println("카드월"+param.getCardMonth());
+		System.out.println("카드년	"+param.getCardYear());
+		
+		return (sqlsession.getMapper(CardMapper.class).update(param)!=0)?"success":"fail";
+	}
 }
