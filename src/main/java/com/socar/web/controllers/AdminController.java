@@ -213,7 +213,7 @@ public class AdminController {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		command.setKeyField(keyField);
 		command.setKeyword(keyword);
-        Retval r = car_service.findCount(command);
+        Retval r = car_service.find_count(command);
         int totCount = r.getCount();	
 		pages = Pagination.getPages(totCount, Integer.parseInt(pgNum));
 		rows = Pagination.getRows(totCount, Integer.parseInt(pgNum), Values.PG_SIZE);

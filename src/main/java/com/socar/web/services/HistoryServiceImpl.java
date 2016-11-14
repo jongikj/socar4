@@ -73,5 +73,17 @@ public class HistoryServiceImpl implements HistoryService{
 		HistoryMapper mapper = sqlSession.getMapper(HistoryMapper.class);
 		return mapper.useStatus(command);
 	}
+
+	@Override
+	public Retval rentCancel(Command command) {
+		HistoryMapper mapper = sqlSession.getMapper(HistoryMapper.class);
+		return mapper.rentCancel(command);
+	}
+
+	@Override
+	public Retval couponRestore(Command command) {
+		HistoryMapper mapper = sqlSession.getMapper(HistoryMapper.class);
+		return mapper.couponRestore(command);
+	}
 	
 }

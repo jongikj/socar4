@@ -23,14 +23,14 @@
      select t2.*
 	from (SELECT @ROWNUM := @ROWNUM + 1 AS seq2
 				,c.seq
-	            ,c.carNum
-	            ,c.carType
-	            ,c.oilType
-	            ,c.carOption
-	            ,c.socarZone
-	            ,c.rentAmt
-	            ,c.driveAmt
-	            ,c.carImg
+	            ,c.car_num carNum
+	            ,c.car_type carType
+	            ,c.oil_type oilType
+	            ,c.car_option carOption
+	            ,c.socar_zone socarZone
+	            ,c.rent_amt rentAmt
+	            ,c.drive_amt driveAmt
+	            ,c.car_img carImg
 	      FROM   car_v c
 	            ,(SELECT @ROWNUM := 0) R
 	     ) t2
@@ -43,14 +43,14 @@
    <select id="find_count" resultType="com.socar.web.domains.Retval" parameterType="com.socar.web.domains.Command">
    	select count(*) as count 
    	from   (SELECT c.seq
-	            ,c.carNum
-	            ,c.carType
-	            ,c.oilType
-	            ,c.carOption
-	            ,c.socarZone
-	            ,c.rentAmt
-	            ,c.driveAmt
-	            ,c.carImg
+	            ,c.car_num carNum
+	            ,c.car_type carType
+	            ,c.oil_type oilType
+	            ,c.car_option carOption
+	            ,c.socar_zone socarZone
+	            ,c.rent_amt rentAmt
+	            ,c.drive_amt driveAmt
+	            ,c.car_img carImg
 	      FROM   car_v c
 	      WHERE  ${keyField} like CONCAT('%',#{keyword},'%')
 	     ) t2

@@ -19,7 +19,7 @@ public interface CarService {
 	
 	// SELECT
 	public Retval count();
-	public Retval findCount(Command command);
+	public Retval find_count(Command command);
 	public List<CarDTO> find(Command command);
 	public List<CarDTO> list();
 	public CarDTO findOne(Command command);

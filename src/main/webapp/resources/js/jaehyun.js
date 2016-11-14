@@ -584,11 +584,12 @@ var member = (function(){
 								+'<th colspan="2">예약</th>'
 								+'<th>총 요금</th>'
 								+'<th>결제상태</th>'
-								+'<th>결제</th>'
+								+'<th>결제/취소</th>'
 								+'</tr>'
 								+'</thead>'
 								+'<tbody>';
 							$.each(data.list, function(i, history){
+								var statusNum = 0;
 								var start = history.startDate.split('-');
 								var end = history.endDate.split('-');
 								var start2 = 0;
@@ -601,8 +602,10 @@ var member = (function(){
 								var status = '';
 								if(history.status == 'N'){
 									status = '결제가능';
+									statusNum = 0;
 								} else {
 									status = '결제완료';
+									statusNum = 1;
 								}
 								MYHISTORY_FORM +=
 									 '<tr>'
@@ -632,7 +635,11 @@ var member = (function(){
 									+'<a class="btn_payment_status'+history.rentSeq+' status" >'+status+'</a>'
 									+'</td>'
 									+'<td>'
-									+'<a id="btn_payment" class="btnS rvExtendB"><span onclick="member.payment('+history.rentSeq+','+history.price+')">결제</span></a>'
+									+'<a id="btn_payment" class="btnS rvExtendB">'
+									+'<span onclick="member.payment('+history.rentSeq+','+history.price+')">결제</span></a>'
+									+'<a id="btn_payment" class="btnS rvExtendB">'
+									+'<span onclick="member.rent_cancel('+history.rentSeq+','+history.couponMemberSeq+', '+statusNum+')">취소</span>'
+									+'</a>'
 									+'</td>'
 									+'</tr>'
 								});
@@ -889,6 +896,21 @@ var member = (function(){
 					});
 				}
 			});
+		},
+		rent_cancel : function(rentSeq, couponMemberSeq, status){
+			if(status == 0){
+				$.getJSON(app.context() + '/history/rentCancel/'+rentSeq+'', function(){
+					alert('예약을 취소하였습니다.');
+					if(couponMemberSeq != 0 ){
+						$.getJSON(app.context() + '/history/couponRestore/'+couponMemberSeq+'', function(){
+							alert('예약에 사용한 쿠폰이 환불되었습니다.');
+						});
+					}
+					member.history();
+				});
+			} else {
+				alert('이미 결제된 내역은 취소할 수 없습니다.');
+			}
 		}
 	};	
 })();

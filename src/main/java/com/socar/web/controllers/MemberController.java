@@ -268,7 +268,7 @@ public class MemberController {
       logger.info("MemberController GO TO {}", "regist");
       MemberDTO temp = new MemberDTO();
       temp.setId(param.getId());
-      temp.setPw(param.getPw());
+      temp.setPw(param.getPw()); 
       temp.setName(param.getName());
       temp.setEmail(param.getEmail());
       temp.setAddress(param.getAddress());

@@ -150,9 +150,23 @@ public class HistoryController {
 	   }
 	
 	   @RequestMapping("/useStatus/{keyword}")
-	   public @ResponseBody Retval useStauts(@PathVariable String keyword){
+	   public @ResponseBody Retval useStatus(@PathVariable String keyword){
 	      command.setKeyword(keyword);
 	      service.useStatus(command);
 	      return retval;
+	   }
+	   
+	   @RequestMapping("/rentCancel/{keyword}")
+	   public @ResponseBody Retval rentCancel(@PathVariable String keyword){
+		   command.setKeyword(keyword);
+		   service.rentCancel(command);
+		   return retval;
+	   }
+	   
+	   @RequestMapping("/couponRestore/{keyword}")
+	   public @ResponseBody Retval couponRestore(@PathVariable String keyword){
+		   command.setKeyword(keyword);
+		   service.couponRestore(command);
+		   return retval;
 	   }
 }

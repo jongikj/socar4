@@ -15,7 +15,7 @@ import com.socar.web.domains.Retval;
 public interface CarMapper {
 	// SELECT
 	public Retval count();
-	public Retval findCount(Command command);
+	public Retval find_count(Command command);
 	public List<CarDTO> find(Command command);
 	public List<CarDTO> list();
 	public List<String> listZone();

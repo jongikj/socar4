@@ -29,9 +29,9 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public Retval findCount(Command command) {
+	public Retval find_count(Command command) {
 		CarMapper mapper = sqlsession.getMapper(CarMapper.class);
-		return mapper.findCount(command);
+		return mapper.find_count(command);
 	}
 	
 	@Override

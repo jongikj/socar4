@@ -47,7 +47,7 @@ public class CarController {
         command.setKeyField(keyField);
         command.setKeyword(keyword);
         HashMap<String, Object> map = new HashMap<String, Object>();
-        retval = service.findCount(command);
+        retval = service.find_count(command);
         int totCount = retval.getCount();   
         int[] pages = Pagination.getPages(totCount, Integer.parseInt(pgNum));
         int[] rows = Pagination.getRows(totCount, Integer.parseInt(pgNum), Values.PG_SIZE);
