@@ -97,14 +97,14 @@
    </select>
    <select id="car_find_by_num" resultType="com.socar.web.domains.CarDTO" parameterType="com.socar.web.domains.Command">
       select  c.seq
-             ,c.carNum
-		     ,c.carType
-		     ,c.oilType
-		     ,c.carOption
-		     ,c.socarZone
-		     ,c.rentAmt
-		     ,c.driveAmt
-		     ,c.carImg
+             ,c.car_num carNum
+		     ,c.car_type carType
+		     ,c.oil_type oilType
+		     ,c.car_option carOption
+		     ,c.socar_zone socarZone
+		     ,c.rent_amt rentAmt
+		     ,c.drive_amt driveAmt
+		     ,c.car_img carImg
 	  FROM    car_v c
 	  where ${keyField} = #{keyword}
    </select>
@@ -120,7 +120,7 @@
       }
    </update>
    <select id="existId" parameterType="com.socar.web.domains.CarDTO" resultType="int">
-      select count(*) from car_v where carNum = #{carNum}
+      select count(*) from car_v where car_num = #{carNum}
    </select>
    <insert id="regist" statementType="CALLABLE" parameterType="com.socar.web.domains.CarDTO">
       { call insert_car(
